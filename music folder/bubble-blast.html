@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BrainBite - Bubble Blast</title>
+    
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+        }
+
+        #level-1-house {
+            position: absolute;
+            bottom: 20px;
+            left: 20px;
+            cursor: pointer;
+        }
+
+        #game-container {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: #f0f0f0;
+            display: none;
+        }
+
+        #bubble-container {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 80%;
+            height: 80%;
+            background-color: #ffffff;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .bubble {
+            position: absolute;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <canvas id="background-canvas" width="800" height="600"></canvas>
+    <img id="level-1-house" src="https://img.freepik.com/premium-photo/lenardo-2_758470-8998.jpg?ga=GA1.1.1903596183.1727901429&semt=ais_hybrid" alt="Level 1 House" width="120" height="120">
+    <div id="game-container">
+        <div id="bubble-container">
+            <!-- Bubbles will be generated here -->
+        </div>
+    </div>
+    <script>
+        // Get the canvas element
+        const canvas = document.getElementById('background-canvas');
+        const ctx = canvas.getContext('2d');
+
+        // Set the canvas dimensions
+        canvas.width = 800;
+        canvas.height = 600;
+
+        // Define the bubble properties
+        const bubbles = [];
+        for (let i = 0; i < 50; i++) {
+            bubbles.push({
+                x: Math.random() * canvas.width,
+                y: Math.random() * canvas.height,
+                radius: Math.random() * 20 + 10,
+                color: `hsl(${Math.random() * 360}, 100%, 50%)`,
+                speedX: Math.random() * 2 - 1,
+                speedY: Math.random() * 2 - 1
+            });
+        }
+
+        // Animation loop
+        let fade = 0;
+        function animate() {
+            // Clear the canvas
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+            // Draw the background
+            ctx.fillStyle = `hsla(${Math.random() * 360}, 100%, 50%, ${fade})`;
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+            // Update the fade effect
+            fade += 0.01;
+            if (fade > 1) {
+                fade = 0;
+            }
+
+            // Draw the bubbles
+            bubbles.forEach((bubble) => {
+                ctx.beginPath();
+                ctx.arc(bubble.x, bubble.y, bubble.radius, 0, Math.PI * 2);
+                ctx.fillStyle = bubble.color;
+                ctx.fill();
+
+                // Update the bubble position
+                bubble.x += bubble.speedX;
+                bubble.y += bubble.speedY;
+
+                // Collision detection with canvas edges
+                if (bubble.x + bubble.radius > canvas.width || bubble.x - bubble.radius < 0) {
+                    bubble.speedX = -bubble.speedX;
+                }
+                if (bubble.y + bubble.radius > canvas.height || bubble.y - bubble.radius < 0) {
+                    bubble.speedY = -bubble.speedY;
+                }
+            });
+
+            // Request the next frame
+            requestAnimationFrame(animate);
+        }
+
+        // Start the animation loop
+        animate();
+
+        // Add event listener to the house
+        document.getElementById('level-1-house').addEventListener('click', () => {
+            alert('Start Level 1!');
+            document.getElementById('game-container').style.display = 'block';
+            startGame();
+        });
+
+        // Game logic
+        function startGame() {
+            const bubbleContainer = document.getElementById('bubble-container');
+            const bubbles = [];
+            for (let i = 0; i < 10; i++) {
+                const bubble = document.createElement('div');
+                bubble.className = 'bubble';
+                bubble.style.top = `${i * 50}px`;
+                bubble.style.left = `${Math.random() * (bubbleContainer.offsetWidth - 50)}px`;
+                bubble.style.background = `hsl(${Math.random() * 360}, 100%, 50%)`;
+
+        bubbleContainer.appendChild(bubble);
+        bubbles.push(bubble);
+    }
+
+    bubbles.forEach((bubble) => {
+        bubble.addEventListener('click', () => {
+            const color = bubble.style.background;
+            const sameColorBubbles = bubbles.filter((b) => b.style.background === color);
+            sameColorBubbles.forEach((b) => {
+                b.style.display = 'none';
+            });
+        });
+    });
+}
+</script>
+
+</body>
+</html>

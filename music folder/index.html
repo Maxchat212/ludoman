@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BrainBite</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #ffffff;
+            margin: 0;
+            padding: 0;
+        }
+        
+        header {
+            background-color: #333;
+            color: #fff;
+            padding: 1em;
+            text-align: center;
+            border-bottom: 5px solid #555;
+        }
+        
+        header h1 {
+            font-size: 36px;
+            margin: 0;
+            text-shadow: 2px 2px 4px #000;
+        }
+        
+        main {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 2em;
+        }
+        
+        .welcome-message {
+            font-size: 24px;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+        
+        .avatar {
+            width: 200px;
+            height: 200px;
+            margin: 20px auto;
+        }
+        
+        .bottom-nav {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            background-color: #fff;
+            padding: 10px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-top: 1px solid #ddd;
+        }
+        
+        .nav-btn {
+            background-color: transparent;
+            border: none;
+            padding: 5px;
+            cursor: pointer;
+        }
+        
+        .nav-btn img {
+            width: 20px;
+            height: 20px;
+        }
+        
+        .nav-btn:active {
+            background-color: #f0f0f0;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>BrainBite</h1>
+    </header>
+    <main>
+        <div class="welcome-message">
+            <img src="https://cdn-icons-png.flaticon.com/128/528/528111.png" alt="Avatar" class="avatar">
+            <p>Welcome to BrainBite! We're excited to have you play our games.</p>
+        </div>
+    </main>
+    <div class="bottom-nav">
+        <button class="nav-btn" onclick="window.location.href='scoreboard.html'">
+            <img src="https://cdn-icons-png.flaticon.com/128/9232/9232130.png" alt="Scoreboard Icon">
+        </button>
+        <button class="nav-btn" onclick="window.location.href='bubble-blast.html'">
+            <img src="https://cdn-icons-png.flaticon.com/128/2667/2667632.png" alt="Bubble Blast Icon">
+        </button>
+        <button class="nav-btn" onclick="window.location.href='memory-match.html'">
+            <img src="https://cdn-icons-png.flaticon.com/128/5195/5195835.png" alt="Memory Match Icon">
+        </button>
+        <button class="nav-btn" onclick="window.location.href='quiz.html'">
+            <img src="https://cdn-icons-png.flaticon.com/128/16821/16821877.png" alt="Quiz Icon">
+        </button>
+    </div>
+</body>
+</html>
